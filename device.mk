@@ -92,8 +92,6 @@ TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
     $(TARGET_OUT_SHARED_LIBRARIES)/libion.so \
     $(TARGET_OUT_SHARED_LIBRARIES)/libpuresoftkeymasterdevice.so
 
-#TW_LOAD_VENDOR_MODULES := "ft8722.ko xiaomi.ko nt36672c.ko panel-bias-l19a.ko panel-ft8722-jdi-fhdp-dsi-vdo-90hz-l19a.ko panel-nt36672c-tianma-fhdp-dsi-vdo-90hz-l19a.ko panel-samsung-ana6705-cmd-fhdp.ko"
-
 TW_LOAD_VENDOR_MODULES := "ft8722.ko xiaomi.ko"
 
 # Soong namespaces
