@@ -181,6 +181,7 @@ TWRP_INCLUDE_LOGCAT := true
 
 # Haptics
 TW_SUPPORT_INPUT_AIDL_HAPTICS := true
+TW_SUPPORT_INPUT_AIDL_HAPTICS_FQNAME := "IVibrator/default"
 
 # Use legacy code for battery readout
 TW_USE_LEGACY_BATTERY_SERVICES := true
