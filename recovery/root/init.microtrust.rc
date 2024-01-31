@@ -1,4 +1,4 @@
- For MTK DRM integration:
+# For MTK DRM integration:
 service teei_daemon /vendor/bin/teei_daemon \
     -r 020b0000000000000000000000000000 \
     -r 020f0000000000000000000000000000 \
