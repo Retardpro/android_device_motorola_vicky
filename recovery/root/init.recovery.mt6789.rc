@@ -48,6 +48,7 @@ on boot
     chmod 0664 /dev/xiaomi-touch
     chown system system /sys/class/touch/tp_dev/fod_status
     chmod 0664 /sys/class/touch/tp_dev/fod_status
+    start vendor.vibrator-default
 
 service mtk.plpath.utils.link /system/bin/mtk_plpath_utils
     class main
@@ -108,6 +109,3 @@ on property:twrp.all.users.decrypted=true
     stop keymint-beanpod
     stop gatekeeper-1-0
     stop keymaster
-
-on property:twrp.modules.loaded=true
-    start vendor.vibrator-default
