@@ -6,6 +6,7 @@ on init
     mkdir /mnt/vendor/persist 0700 root root
     mount ext4 /dev/block/platform/bootdevice/by-name/persist /mnt/vendor/persist
     export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
+    write /sys/class/leds/vibrator/trigger "transient"
     setprop crypto.ready 1
 
 on fs
@@ -35,6 +36,13 @@ on post-fs
 on boot
     start health-hal-2-1
     setprop sys.usb.config adb
+
+    chown system system /sys/class/leds/vibrator/trigger
+    chown system system /sys/class/leds/vibrator/activate
+    chown system system /sys/class/leds/vibrator/brightness
+    chown system system /sys/class/leds/vibrator/duration
+    chown system system /sys/class/leds/vibrator/state
+    chown system system /sys/class/timed_output/vibrator/enable
 
     chown system system /dev/xiaomi-touch
     chmod 0664 /dev/xiaomi-touch
