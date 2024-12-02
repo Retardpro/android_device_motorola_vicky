@@ -3,6 +3,6 @@
 # SPDX-License-Identifier: Apache-2.0
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/twrp_rock.mk
+    $(LOCAL_DIR)/twrp_vicky.mk
 
-COMMON_LUNCH_CHOICES := twrp_rock-eng
+COMMON_LUNCH_CHOICES := twrp_vicky-eng
