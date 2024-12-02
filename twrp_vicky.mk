@@ -22,7 +22,7 @@ PRODUCT_MODEL := Moto g72
 PRODUCT_MANUFACTURER := Motorola
 
 # Device path for OEM device tree
-DEVICE_PATH := device/$(BOARD_VENDOR)/$(PRODUCT_DEVICE)
+DEVICE_PATH := device/motorola/vicky/twrp)
 
 # Inherit from hardware-specific part of the product configuration
 $(call inherit-product, $(DEVICE_PATH)/device.mk)
