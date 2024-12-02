@@ -48,12 +48,12 @@ AB_OTA_POSTINSTALL_CONFIG += \
     POSTINSTALL_OPTIONAL_system=true
 
 # API
-PRODUCT_SHIPPING_API_LEVEL := 32
+PRODUCT_SHIPPING_API_LEVEL := 31
 
 # Bootctrl
 PRODUCT_PACKAGES += \
-    android.hardware.boot@1.2-mtkimpl \
-    android.hardware.boot@1.2-mtkimpl.recovery
+    android.hardware.boot@1.0-impl \
+    android.hardware.boot@1.0-service
 
 PRODUCT_PACKAGES_DEBUG += \
     bootctrl
@@ -93,7 +93,7 @@ TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
     $(TARGET_OUT_SHARED_LIBRARIES)/libion.so \
     $(TARGET_OUT_SHARED_LIBRARIES)/libpuresoftkeymasterdevice.so
 
-TW_LOAD_VENDOR_MODULES := "ft8722.ko xiaomi.ko"
+TW_LOAD_VENDOR_MODULES := "goodix_brl_mmi.so"
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
