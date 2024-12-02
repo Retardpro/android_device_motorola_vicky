@@ -16,7 +16,7 @@ repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync 
 ---------------
 **Clone this repo**
 ```bash
-git clone https://github.com/retardpro/android_device_motorola_vicky_twrp -b android-12.1 device/motorola/vicky
+git clone https://github.com/retardpro/android_device_motorola_vicky -b android-12.1 device/motorola/vicky
 ```
 
 3.Build
