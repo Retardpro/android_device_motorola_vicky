@@ -1,111 +1,31 @@
-import /init.microtrust.rc
+import /init.recovery.project.rc
 
 on init
-    # Create a more standard /dev/block layout for our scripts
-    symlink /dev/block/platform/bootdevice /dev/block/bootdevice
-    mkdir /mnt/vendor/persist 0700 root root
-    mount ext4 /dev/block/platform/bootdevice/by-name/persist /mnt/vendor/persist
-    export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
-    write /sys/class/leds/vibrator/trigger "transient"
-    setprop crypto.ready 1
+    setprop sys.usb.configfs 1
+    setprop sys.usb.controller "musb-hdrc"
+    setprop sys.usb.ffs.aio_compat 0
 
-on fs
-    install_keyring
-
-on late-fs
-    mount -o bind /first_stage_ramdisk/fstab.mt6789 /vendor/etc/fstab.mt6789 || true
-    mount_all /first_stage_ramdisk/fstab.mt6789 --late
-
-on post-fs
-    start boot-hal-1-2
-    exec u:r:update_engine:s0 root root -- /system/bin/mtk_plpath_utils
-    start mtk.plpath.utils.link
-    # Support A/B feature for EMMC and UFS boot region
-    wait /dev/block/mmcblk0boot0 2
-    symlink /dev/block/sda /dev/block/mmcblk0boot0
-    symlink /dev/block/sdb /dev/block/mmcblk0boot1
-    symlink /dev/block/mmcblk0boot0 /dev/block/platform/bootdevice/by-name/preloader_a
-    symlink /dev/block/mmcblk0boot1 /dev/block/platform/bootdevice/by-name/preloader_b
-
-    # Support A/B feature for combo emmc and ufs OTA update
-    symlink /dev/block/platform/bootdevice/by-name/preloader_a /dev/block/platform/bootdevice/by-name/preloader_emmc_a
-    symlink /dev/block/platform/bootdevice/by-name/preloader_b /dev/block/platform/bootdevice/by-name/preloader_emmc_b
-    symlink /dev/block/platform/bootdevice/by-name/preloader_a /dev/block/platform/bootdevice/by-name/preloader_ufs_a
-    symlink /dev/block/platform/bootdevice/by-name/preloader_b /dev/block/platform/bootdevice/by-name/preloader_ufs_b
+on fs && property:ro.debuggable=0
+    # distinguish USB shoulde connect or not, i.e. CDP vs SDP
+    write /sys/class/udc/musb-hdrc/device/cmode 2
+    # set charging free due to it wait for USB activation
+    start adbd
 
 on boot
-    start health-hal-2-1
-    setprop sys.usb.config adb
+    exec u:r:update_engine:s0 root root -- /system/bin/mtk_plpath_utils
 
-    chown system system /sys/class/leds/vibrator/trigger
-    chown system system /sys/class/leds/vibrator/activate
-    chown system system /sys/class/leds/vibrator/brightness
-    chown system system /sys/class/leds/vibrator/duration
-    chown system system /sys/class/leds/vibrator/state
-    chown system system /sys/class/timed_output/vibrator/enable
+on fs
+    # Support A/B feature for EMMC and UFS boot region
+    symlink /dev/block/sda /dev/block/mmcblk0boot0
+    symlink /dev/block/sdb /dev/block/mmcblk0boot1
+    symlink /dev/block/mmcblk0boot0 /dev/block/by-name/preloader_a
+    symlink /dev/block/mmcblk0boot1 /dev/block/by-name/preloader_b
 
-    chown system system /dev/xiaomi-touch
-    chmod 0664 /dev/xiaomi-touch
-    chown system system /sys/class/touch/tp_dev/fod_status
-    chmod 0664 /sys/class/touch/tp_dev/fod_status
-    start vendor.vibrator-default
+    # Support A/B feature for combo emmc and ufs OTA update
+    symlink /dev/block/by-name/preloader_a /dev/block/by-name/preloader_emmc_a
+    symlink /dev/block/by-name/preloader_b /dev/block/by-name/preloader_emmc_b
+    symlink /dev/block/by-name/preloader_a /dev/block/by-name/preloader_ufs_a
+    symlink /dev/block/by-name/preloader_b /dev/block/by-name/preloader_ufs_b
 
-service mtk.plpath.utils.link /system/bin/mtk_plpath_utils
-    class main
-    user root
-    group root system
-    disabled
-    oneshot
-    seclabel u:r:recovery:s0
-
-service keymint-beanpod /vendor/bin/hw/android.hardware.security.keymint@1.0-service.beanpod
-    interface android.hardware.keymaster@4.0::IKeymasterDevice default
-    interface android.hardware.keymaster@4.1::IKeymasterDevice default
-    user root
-    group root drmrpc
-    disabled
-    oneshot
-    seclabel u:r:recovery:s0
-
-service gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-service
-    interface android.hardware.gatekeeper@1.0::IGatekeeper default
-    user root
-    group root
-    disabled
-    seclabel u:r:recovery:s0
-
-service vendor.vibrator-default /vendor/bin/hw/android.hardware.vibrator-service.mediatek
-    class hal
-    user system
-    group system
-    seclabel u:r:recovery:s0
-
-on property:hwservicemanager.ready=true
-    start teei_daemon
-    start gatekeeper-1-0
-    start keymint-beanpod
-    start keymaster
-
-on property:vendor.sys.listener.registered=true
-    start teei_daemon
-    start gatekeeper-1-0
-    start keymint-beanpod
-    start keymaster
-
-on property:ro.crypto.state=unsupported
-    stop teei_daemon
-    stop keymint-beanpod
-    stop gatekeeper-1-0
-    stop keymaster-4-1
-
-on property:ro.crypto.state=unencrypted
-    stop teei_daemon
-    stop keymint-beanpod
-    stop gatekeeper-1-0
-    stop keymaster
-
-on property:twrp.all.users.decrypted=true
-    stop teei_daemon
-    stop keymint-beanpod
-    stop gatekeeper-1-0
-    stop keymaster
+    wait /dev/block/platform/soc/${ro.boot.bootdevice}
+    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/platform/bootdevice
