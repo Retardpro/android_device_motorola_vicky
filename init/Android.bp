@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 cc_library_static {
-    name: "libinit_rock",
+    name: "libinit_vicky",
     header_libs: [
         "libbase_headers",
     ],
@@ -12,6 +12,6 @@ cc_library_static {
     static_libs: [
         "libbase",
     ],
-    srcs: ["init_rock.cpp"],
+    srcs: ["init_vicky.cpp"],
     recovery_available: true,
 }
