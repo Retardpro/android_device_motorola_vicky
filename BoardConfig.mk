@@ -5,8 +5,6 @@
 # For building with minimal manifest
 ALLOW_MISSING_DEPENDENCIES := true
 
-DEVICE_PATH := device/motorola/vicky/twrp
-
 # Build Hack
 BUILD_BROKEN_DUP_RULES := true
 
