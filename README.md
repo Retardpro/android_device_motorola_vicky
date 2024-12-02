@@ -1,4 +1,4 @@
-# Device Tree for building TWRP for Poco M5 (rock)
+# Device Tree for building TWRP for Moto g72 (vicky)
 
 1.Getting Started
 ---------------
@@ -16,7 +16,7 @@ repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync 
 ---------------
 **Clone this repo**
 ```bash
-git clone https://github.com/brigudav/android_device_xiaomi_rock_twrp -b android-12.1 device/xiaomi/rock
+git clone https://github.com/retardpro/android_device_motorola_vicky_twrp -b android-12.1 device/motorola/vicky
 ```
 
 3.Build
@@ -27,9 +27,9 @@ git clone https://github.com/brigudav/android_device_xiaomi_rock_twrp -b android
 ```
 **Build the recovery**
 ```bash
-lunch twrp_rock-eng
+lunch twrp_vicky-eng
 mka vendorbootimage
 ```
 
 * If also that is successful, congratulation!
-* Go to `out/target/product/rock/` and you will find your vendor_boot.img
+* Go to `out/target/product/vicky/` and you will find your vendor_boot.img
