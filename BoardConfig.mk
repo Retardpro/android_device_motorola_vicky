@@ -160,6 +160,9 @@ TARGET_USES_MKE2FS := true
 # Display
 TW_NO_SCREEN_BLANK := true
 
+# touchscreen
+TW_LOAD_VENDOR_MODULES := "goodix_brl_mmi.ko"
+
 # UI
 TW_THEME := portrait_hdpi
 TW_FRAMERATE := 60
