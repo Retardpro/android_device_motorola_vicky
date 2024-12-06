@@ -142,7 +142,7 @@ VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 TW_DEVICE_VERSION := Motorola G72
 
 #Battery Percentage
-TW_CUSTOM_BATTERY_PATH := 'sys/class/power_supply/battery/capacity
+TW_CUSTOM_BATTERY_PATH := "/sys/class/power_supply/battery/capacity"
 
 #Fix status bar padding
 TW_CUSTOM_CPU_POS := 290
