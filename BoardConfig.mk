@@ -138,6 +138,21 @@ PLATFORM_SECURITY_PATCH := 2099-12-31
 BOOT_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 
+# TWRP Addons
+TW_DEVICE_VERSION := Motorola G72
+TWRP_EVENT_LOGGING := true
+TW_INCLUDE_LPTOOLS := true
+TW_INCLUDE_REPACKTOOLS := true
+TW_INCLUDE_LIBRESETPROP := true
+TW_INCLUDE_RESETPROP := true
+
+#Battery Percentage
+TW_CUSTOM_BATTERY_PATH := 'sys/class/power_supply/battery/capacity
+
+#Fix status bar padding
+TW_CUSTOM_CPU_POS := 290
+TW_CUSTOM_CLOCK_POS := 40
+
 # TWRP Configuration
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 RECOVERY_SDCARD_ON_DATA := true
@@ -145,7 +160,7 @@ TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
 TW_MAX_BRIGHTNESS := 2047
 TW_DEFAULT_BRIGHTNESS := 1200
 TW_INPUT_BLACKLIST := "hbtp_vm"
-TW_CUSTOM_CPU_TEMP_PATH := "/sys/class/thermal/thermal_zone28/temp"
+TW_CUSTOM_CPU_TEMP_PATH := "/sys/class/thermal/thermal_zone1/temp"
 TW_EXCLUDE_APEX := true
 
 TW_BACKUP_EXCLUSIONS := /data/fonts/files
