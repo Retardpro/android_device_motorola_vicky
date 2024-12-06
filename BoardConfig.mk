@@ -140,11 +140,6 @@ VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 
 # TWRP Addons
 TW_DEVICE_VERSION := Motorola G72
-TWRP_EVENT_LOGGING := true
-TW_INCLUDE_LPTOOLS := true
-TW_INCLUDE_REPACKTOOLS := true
-TW_INCLUDE_LIBRESETPROP := true
-TW_INCLUDE_RESETPROP := true
 
 #Battery Percentage
 TW_CUSTOM_BATTERY_PATH := 'sys/class/power_supply/battery/capacity
@@ -182,9 +177,6 @@ TW_LOAD_VENDOR_MODULES := "goodix_brl_mmi.ko touchscreen_mmi.ko"
 # UI
 TW_THEME := portrait_hdpi
 TW_FRAMERATE := 60
-TW_STATUS_ICONS_ALIGN := center
-TW_CUSTOM_CPU_POS := 50
-TW_CUSTOM_CLOCK_POS := 300
 TW_CUSTOM_BATTERY_POS := 800
 
 # TWRP binaries tools
