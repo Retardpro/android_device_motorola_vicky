@@ -1,0 +1,70 @@
+#change partition permission
+# eMMC only
+/dev/block/mmcblk0                               0660    root    system
+/dev/block/mmcblk0boot0                          0660    root    system
+/dev/block/mmcblk0boot1                          0660    root    system
+
+# UFS only
+/dev/block/sda                                   0660    root    system
+/dev/block/sdb                                   0660    root    system
+/dev/block/sdc                                   0660    root    system
+
+# eMMC/UFS common
+/dev/block/by-name/misc     0660    root    system
+/dev/block/by-name/boot      0640    root    system
+/dev/block/by-name/recovery  0640    root    system
+/dev/block/by-name/seccfg    0660    root    system
+/dev/block/by-name/proinfo   0660    root    system
+/dev/block/by-name/nvram     0660    root    system
+/dev/block/by-name/para      0660    root    system
+/dev/block/by-name/logo      0660    root    system
+/dev/block/by-name/frp       0660    root    system
+/dev/block/by-name/md1img    0640    root    system
+/dev/block/by-name/md1img_a  0640    root    system
+/dev/block/by-name/md1img_b  0640    root    system
+/dev/block/by-name/boot_para 0640    root    system
+
+
+# FMRadio
+/dev/fm                   0660   media     media
+
+
+# Trusty driver
+/dev/trusty-ipc-dev0      0660   system     system
+
+
+
+# TrustonicTEE driver
+/dev/mobicore             0600   system     system
+/dev/mobicore-user        0666   system     system
+
+# teeperf driver
+/dev/teeperf              0666   system     system
+
+
+# add the read write right of ttyUSB*
+/dev/bus/usb/*     	  0660   root       usb
+
+
+
+# Change DMA_HEAP deice permission
+#     refs: /system/core/rootdir/uevent.rc
+#           /dev/dma_heap/system      0444   system     system
+/dev/dma_heap/mtk_mm                        0444   system     system
+/dev/dma_heap/mtk_mm-uncached               0444   system     system
+/dev/dma_heap/mtk_svp_page-uncached                 0444   system     system
+/dev/dma_heap/mtk_prot_page-uncached                0444   system     system
+/dev/dma_heap/mtk_svp_region                        0444   system     system
+/dev/dma_heap/mtk_svp_region-aligned                0444   system     system
+/dev/dma_heap/mtk_prot_region                       0444   system     system
+/dev/dma_heap/mtk_prot_region-aligned               0444   system     system
+/dev/dma_heap/mtk_2d_fr_region                      0444   system     system
+/dev/dma_heap/mtk_2d_fr_region-aligned              0444   system     system
+/dev/dma_heap/mtk_wfd_region                        0444   system     system
+/dev/dma_heap/mtk_wfd_region-aligned                0444   system     system
+/dev/dma_heap/mtk_wfd_page-uncached                 0444   system     system
+
+
+#hang_detect
+/dev/RT_Monitor           0660   system     system
+
