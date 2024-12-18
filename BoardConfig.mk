@@ -139,7 +139,7 @@ BOOT_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 
 # TWRP Addons
-TW_DEVICE_VERSION := Motorola G72
+TW_DEVICE_VERSION := Motorola G72 by Retardpro
 
 #Battery Percentage
 TW_CUSTOM_BATTERY_PATH := "/sys/class/power_supply/battery/capacity"
@@ -155,14 +155,14 @@ TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
 TW_MAX_BRIGHTNESS := 2047
 TW_DEFAULT_BRIGHTNESS := 1200
 TW_INPUT_BLACKLIST := "hbtp_vm"
-TW_CUSTOM_CPU_TEMP_PATH := "/sys/class/thermal/thermal_zone1/temp"
+#TW_CUSTOM_CPU_TEMP_PATH := "/sys/class/thermal/thermal_zone1/temp"
 TW_EXCLUDE_APEX := true
 
 TW_BACKUP_EXCLUSIONS := /data/fonts/files
 
 # For USB OTG
 TW_EXCLUDE_DEFAULT_USB_INIT := true
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.usb0/lun.%d/file
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file
 
 # Filesystem tools
 TW_INCLUDE_NTFS_3G := true
