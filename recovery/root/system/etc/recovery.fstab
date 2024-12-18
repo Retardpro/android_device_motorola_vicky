@@ -5,28 +5,23 @@
 # TODO: Add 'check' as fs_mgr_flags with data partition.
 # Currently we dont have e2fsck compiled. So fs check would failed.
 
-system /system ext4 ro wait,slotselect,avb=vbmeta_system,logical,first_stage_mount
-system_ext /system_ext ext4 ro wait,slotselect,avb=vbmeta_system,logical,first_stage_mount
-
-vendor /vendor ext4 ro wait,slotselect,avb,logical,first_stage_mount
-
-
-product /product ext4 ro wait,slotselect,avb,logical,first_stage_mount
-
-
-
-vendor_dlkm /vendor_dlkm ext4 ro wait,slotselect,avb,logical,first_stage_mount
+system                                                 /system                erofs   ro                                                  wait,slotselect,avb=vbmeta_system,logical,first_stage_mount
+system                                                 /system                ext4    ro                                                  wait,slotselect,avb=vbmeta_system,logical,first_stage_mount
+vendor                                                 /vendor                erofs   ro                                                  wait,slotselect,avb,logical,first_stage_mount
+vendor                                                 /vendor                ext4    ro                                                  wait,slotselect,avb,logical,first_stage_mount
+product                                                /product               erofs   ro                                                  wait,slotselect,avb,logical,first_stage_mount
+product                                                /product               ext4    ro                                                  wait,slotselect,avb,logical,first_stage_mount
+system_ext                                             /system_ext            erofs   ro                                                  wait,slotselect,avb=vbmeta_system,logical,first_stage_mount
+system_ext                                             /system_ext            ext4    ro                                                  wait,slotselect,avb=vbmeta_system,logical,first_stage_mount
+vendor_dlkm                                            /vendor_dlkm           erofs   ro                                                  wait,slotselect,avb,logical,first_stage_mount
+odm_dlkm                                               /odm_dlkm              erofs   ro                                                  wait,slotselect,avb,logical,first_stage_mount
 
 
 
 /dev/block/by-name/metadata /metadata ext4 noatime,nosuid,nodev,discard wait,check,formattable,first_stage_mount
 
-/dev/block/by-name/userdata /data f2fs noatime,nosuid,nodev,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,inlinecrypt wait,check,formattable,quota,latemount,resize,reservedsize=128m,checkpoint=fs,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized+wrappedkey_v0,metadata_encryption=aes-256-xts:wrappedkey_v0,keydirectory=/metadata/vold/metadata_encryption,sysfs_path=/sys/devices/platform/112b0000.ufshci,fsverity
+/dev/block/by-name/userdata /data f2fs noatime,nosuid,nodev,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,checkpoint_merge,gc_merge,inlinecrypt wait,check,formattable,quota,latemount,reservedsize=128m,checkpoint=fs,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keydirectory=/metadata/vold/metadata_encryption,fsverity
 
-
-
-
-/devices/platform/soc/mt_usb* auto vfat defaults voldmanaged=usbotg:auto
 
 /dev/block/by-name/frp /persistent emmc defaults defaults
 

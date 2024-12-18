@@ -3,17 +3,9 @@
 /vendor                   ext4     vendor                                  flags=display=vendor;logical;slotselect;backup=1;flashimg=1
 /product                  ext4     product                                 flags=display=product;logical;slotselect;backup=1;flashimg=1
 /vendor_dlkm              ext4     vendor_dlkm                             flags=display=vendor_dlkm;logical;slotselect;backup=1;flashimg=1
-/metadata                 ext4     /dev/block/by-name/metadata             flags=display=metadata;backup=1;flashimg=1
-/data                     f2fs     /dev/block/by-name/userdata             flags=display=data;backup=1;flashimg=1
-/mnt/vendor/protect_f     ext4     /dev/block/by-name/protect1             flags=display=protect_f;backup=1;flashimg=1
-/mnt/vendor/protect_s     ext4     /dev/block/by-name/protect2             flags=display=protect_s;backup=1;flashimg=1
-/mnt/vendor/nvdata        ext4     /dev/block/by-name/nvdata               flags=display=nvdata;backup=1;flashimg=1
-/mnt/vendor/nvcfg         ext4     /dev/block/by-name/nvcfg                flags=display=nvcfg;backup=1;flashimg=1
-/mnt/vendor/persist       ext4     /dev/block/by-name/persist              flags=display=persist;backup=1;flashimg=1
-/mnt/product/persist      ext4     /dev/block/by-name/prodpersist          flags=display=persist;backup=1;flashimg=1
-/mnt/vendor/tzapp         ext4     /dev/block/by-name/tzapp_a              flags=display=tzapp;backup=1;flashimg=1
-auto                      auto     /devices/platform/soc/11240000.mmc*     flags=display=auto;backup=1;flashimg=1
-auto                      vfat     /devices/platform/soc/mt_usb*           flags=display=auto;backup=1;flashimg=1
+/metadata                 ext4     /dev/block/by-name/metadata             flags=display="metadata";backup=1
+/data                     f2fs     /dev/block/by-name/userdata             flags=fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keydirectory=/metadata/vold/metadata_encryption
+
 /persistent               emmc     /dev/block/by-name/frp                  flags=display=persistent;backup=1;flashimg=1
 /nvram                    emmc     /dev/block/by-name/nvram                flags=display=nvram;backup=1;flashimg=1
 /proinfo                  emmc     /dev/block/by-name/proinfo              flags=display=proinfo;backup=1;flashimg=1
@@ -48,7 +40,6 @@ auto                      vfat     /devices/platform/soc/mt_usb*           flags
 /gpueb                    emmc     /dev/block/by-name/gpueb                flags=display=gpueb;backup=1;flashimg=1
 /mcf_ota                  emmc     /dev/block/by-name/mcf_ota              flags=display=mcf_ota;backup=1;flashimg=1
 /vendor_boot              emmc     /dev/block/by-name/vendor_boot          flags=display=Vendor_Boot;backup=1;flashimg=1
-/dev/block/by-name/mvpu_algo1           flags=display=mvpu_algo1;backup=1;flashimg=1
 /mvpu_algo2               emmc     /dev/block/by-name/mvpu_algo2           flags=display=mvpu_algo2;backup=1;flashimg=1
 /apusys1                  emmc     /dev/block/by-name/apusys1              flags=display=apusys1;backup=1;flashimg=1
 /apusys2                  emmc     /dev/block/by-name/apusys2              flags=display=apusys2;backup=1;flashimg=1
