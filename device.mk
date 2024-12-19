@@ -74,6 +74,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES_DEBUG += \
     update_engine_client
 
+#Properties
+TW_OVERRIDE_SYSTEM_PROPS := \
+    "ro.build.fingerprint=ro.system.build.fingerprint;ro.build.version.incremental"
+
 PRODUCT_PACKAGES += \
     otapreopt_script \
     cppreopts.sh \
