@@ -40,6 +40,9 @@ TARGET_USES_UEFI := true
 # Hardware
 BOARD_USES_MTK_HARDWARE := true
 
+# Compression
+PRODUCT_FS_COMPRESSION := 1
+
 # Platform
 TARGET_BOARD_PLATFORM := mt6789
 
