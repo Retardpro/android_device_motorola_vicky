@@ -51,6 +51,10 @@ AB_OTA_POSTINSTALL_CONFIG += \
 # API
 PRODUCT_SHIPPING_API_LEVEL := 31
 
+# Keymaster
+PRODUCT_PACKAGES += \
+    android.hardware.keymaster@4.1
+
 
 # Bootctrl
 PRODUCT_PACKAGES += \
