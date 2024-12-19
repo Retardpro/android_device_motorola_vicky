@@ -1,4 +1,4 @@
-import /init.microtrust.rc
+import /trustonic.rc
 
 on init
     # Create a more standard /dev/block layout for our scripts
@@ -105,28 +105,25 @@ on property:hwservicemanager.ready=true
     
     
 on property:vendor.sys.listener.registered=true
-    start teei_daemon
     start gatekeeper-1-0
     start keymint-trustonic
-    start keymaster
+    start mobicore
    
 on property:ro.crypto.state=unsupported
-    stop teei_daemon
     stop keymint-trustonic
     stop gatekeeper-1-0
-    stop keymaster-4-1
+    stop mobicore
 
 on property:ro.crypto.state=unencrypted
     stop teei_daemon
     stop keymint-trustonic
-    stop gatekeeper-1-0
-    stop keymaster
+    stop mobicore
     
 on property:twrp.all.users.decrypted=true
     stop teei_daemon
     stop keymint-trustonic
     stop gatekeeper-1-0
-    stop keymaster
+    stop mobicore
 
 on boot
     start health-hal-2-1
