@@ -8,8 +8,7 @@ on init
     mkdir /persist 0700 root root
     mount ext4 /dev/block/by-name/persist /persist
     mkdir /persist/OFRP
-    export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
-    write /sys/class/leds/vibrator/trigger "none"
+    export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw:/system/lib64/hw
     setprop sys.usb.configfs 1
     setprop sys.usb.controller "musb-hdrc"
     setprop sys.usb.ffs.aio_compat 1
@@ -21,12 +20,6 @@ on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
 
-
-service vendor.vibrator-default /vendor/bin/hw/android.hardware.vibrator-service.mediatek
-    class hal
-    user root
-    group root system
-    seclabel u:r:recovery:s0
     
 on late-fs
     mount -o bind /first_stage_ramdisk/fstab.mt6789 /vendor/etc/fstab.mt6789 || true
@@ -83,7 +76,7 @@ service vendor.gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-ser
     disabled
     seclabel u:r:recovery:s0
 
-service vendor.keymaster-4-1-trustonic /vendor/bin/hw/android.hardware.keymaster@4.1-service.trustonic
+service vendor.keymint-trustonic /vendor/bin/hw/android.hardware.security.keymint-service.trustonic
     user root
     group root drmrpc
     disabled
@@ -94,48 +87,44 @@ on property:crypto.ready=1
     start mobicore
     start keymaster_attestation-1-1
     start vendor.gatekeeper-1-0
-    start vendor.keymaster-4-1-trustonic
+    start vendor.keymint-trustonic
 
 on property:hwservicemanager.ready=true
     start mobicore
     start keymaster_attestation-1-1
     start vendor.gatekeeper-1-0
-    start vendor.keymaster-4-1-trustonic
+    start vendor.keymint-trustonic
 
 on property:ro.crypto.state=unsupported
     stop mobicore
     stop keymaster_attestation-1-1
     stop vendor.gatekeeper-1-0
-    stop vendor.keymaster-4-1-trustonic
+    stop vendor.keymint-trustonic
 
 on property:ro.crypto.state=unencrypted
     stop mobicore
     stop keymaster_attestation-1-1
     stop vendor.gatekeeper-1-0
-    stop vendor.keymaster-4-1-trustonic
+    stop vendor.keymint-trustonic
 
 on property:twrp.decrypt.done=true
     stop mobicore
     stop keymaster_attestation-1-1
     stop vendor.gatekeeper-1-0
-    stop vendor.keymaster-4-1-trustonic
+    stop vendor.keymint-trustonic
 
 on property:crypto.ready=0
     stop mobicore
     stop keymaster_attestation-1-1
     stop vendor.gatekeeper-1-0
-    stop vendor.keymaster-4-1-trustonic
+    stop vendor.keymint-trustonic
 
 on boot
     start health-hal-2-1
-    start vendor.vibrator-default
-    setprop sys.usb.config adb
+    setprop sys.usb.config mtp,adb
+    setprop sys.usb.state mtp,adb
+    setprop persist.sys.usb.config mtp,adb
     
-    chown system system /sys/class/leds/vibrator/trigger
-    chown system system /sys/class/leds/vibrator/activate
-    chown system system /sys/class/leds/vibrator/brightness
-    chown system system /sys/class/leds/vibrator/duration
-    chown system system /sys/class/leds/vibrator/state
 
 
 service modules_mount /system/bin/modules_mount.sh
