@@ -49,3 +49,6 @@ OF_CLOCK_POS := 1
 
 # f2fs compression
 OF_ENABLE_FS_COMPRESSION := 1
+
+#fox keymaster 
+OF_DEFAULT_KEYMASTER_VERSION=4.1
