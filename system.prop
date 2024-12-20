@@ -1,6 +1,14 @@
 ro.hardware.kmsetkey=trustonic
 ro.hardware.gatekeeper=trustonic
 ro.vendor.mtk_tee_gp_support=1
+ro.vendor.mtk_trustonic_tee_support=1
+ro.crypto.support_metadata_encrypt=true
+
+# Fstab
+ro.postinstall.fstab.prefix=/system
+
+# Keymaster
+keymaster_ver=4.1
 
 #device_props
 ro.product.vendor.marketname=Motorola G72
