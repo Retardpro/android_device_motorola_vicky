@@ -1,4 +1,6 @@
+import /tee.rc
 import /trustonic.rc
+import /init.custom.rc
 
 on init
     # Create a more standard /dev/block layout for our scripts
